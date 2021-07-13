@@ -41,49 +41,49 @@ for(let i=0;i<buttons.length;i++)
         console.log(i*4+j);
         signatures[i*4+j].addEventListener("click",function()
         {
-            var KeyValue=signatures[i*4+j].innerText;
-            if(KeyValue=="AC")
+            var e=signatures[i*4+j].innerText;
+            if(e=="AC")
             naviListener.innerText=" ";
-            else if(KeyValue=="+")
+            else if(e=="+")
             {
                 operand=naviListener.innerText;
                 operator="+";
                 naviListener.innerText="+";
             }
-            else if(KeyValue=="-")
+            else if(e=="-")
             {
                 operand=naviListener.innerText;
                 operator="-";
                 naviListener.innerText="-";
             }
-            else if(KeyValue=="*")
+            else if(e=="*")
             {
                 operand=naviListener.innerText;
                 operator="*";
                 naviListener.innerText="*";
 
             }
-            else if(KeyValue=="/")
+            else if(e=="/")
             {
                 operand=naviListener.innerText;
                 operator="/";
                 naviListener.innerText="/";
             }
-            else if(KeyValue=="+/-")
+            else if(e=="+/-")
             {
                 let tempValue=naviListener.innerText;
                 let integralValue=parseInt(tempValue,10);
                 let ans=-(integralValue);
                 naviListener.innerText=ans;
             }
-            else if(KeyValue=="%")
+            else if(e=="%")
             {
                 let tempValue=naviListener.innerText;
                 let integralValue=parseInt(tempValue,10);
                 let ans=integralValue/100;
                 naviListener.innerText=ans;
             }
-            else if(KeyValue =="=")
+            else if(e =="=")
             {
                 let tempValue=naviListener.innerText;
                 let integralValue=parseInt(tempValue,10);
@@ -110,7 +110,7 @@ for(let i=0;i<buttons.length;i++)
                 operand="";
                 operator="";
             }
-            else if(KeyValue=="^2")
+            else if(e=="^2")
             {
                 let tempValue=naviListener.innerText;
                 let integralValue=parseInt(tempValue,10);
@@ -122,8 +122,97 @@ for(let i=0;i<buttons.length;i++)
                 let tempValue=naviListener.innerText;
                 if(tempValue=="+" || tempValue=="-" || tempValue=="*" || tempValue=="/" || tempValue=="%" || tempValue=="^2" || tempValue=="=" || tempValue=="+/-")
                 tempValue="";
-                naviListener.innerText=tempValue+KeyValue;
+                naviListener.innerText=tempValue+e;
             }
         });
     }
 }
+
+document.body.addEventListener("keypress",function(e)
+{
+
+            if(e=="AC")
+            naviListener.innerText=" ";
+            else if(e.key=="+")
+            {
+                operand=naviListener.innerText;
+                operator="+";
+                naviListener.innerText="";
+                naviListener.innerText="+";
+            }
+            else if(e.key=="-")
+            {
+                operand=naviListener.innerText;
+                operator="-";
+                naviListener.innerText="-";
+            }
+            else if(e.key=="*")
+            {
+                operand=naviListener.innerText;
+                operator="*";
+                naviListener.innerText="*";
+
+            }
+            else if(e.key=="/")
+            {
+                operand=naviListener.innerText;
+                operator="/";
+                naviListener.innerText="/";
+            }
+            else if(e=="+/-")
+            {
+                let tempValue=naviListener.innerText;
+                let integralValue=parseInt(tempValue,10);
+                let ans=-(integralValue);
+                naviListener.innerText=ans;
+            }
+            else if(e.key=="%")
+            {
+                let tempValue=naviListener.innerText;
+                let integralValue=parseInt(tempValue,10);
+                let ans=integralValue/100;
+                naviListener.innerText=ans;
+            }
+            else if(e.key =="=")
+            {
+                let tempValue=naviListener.innerText;
+                let integralValue=parseInt(tempValue,10);
+                if(operator=="+")
+                {
+                    operand=parseInt(operand,10);
+                    naviListener.innerText=integralValue+operand;
+                }
+                else if(operator=="-")
+                {
+                    naviListener.innerText=operand-integralValue;
+                }
+                else if(operator=="*")
+                {
+                    naviListener.innerText=integralValue*operand;
+                }
+                else if(operator=="/")
+                {
+                    if(integralValue==0)
+                    naviListener.innerText="Error";
+                    else
+                    naviListener.innerText=operand/integralValue;
+                }
+                operand="";
+                operator="";
+            }
+            else if(e.key=="^2")
+            {
+                let tempValue=naviListener.innerText;
+                let integralValue=parseInt(tempValue,10);
+                let ans=Math.pow(integralValue,2);
+                naviListener.innerText=ans;
+            }
+            else
+            {
+                let tempValue=naviListener.innerText;
+                if(tempValue=="+" || tempValue=="-" || tempValue=="*" || tempValue=="/" || tempValue=="%" || tempValue=="^2" || tempValue=="=" || tempValue=="+/-")
+                tempValue="";
+                console.log(e);
+                naviListener.innerText=tempValue+e.key;
+            }
+});
